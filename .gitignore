@@ -1,0 +1,5 @@
+.DS_Store
+*.dmg
+github-recovery-codes.txt
+__pycache__/
+*.pyc
