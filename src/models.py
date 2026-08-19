@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from decimal import Decimal
 
 
 @dataclass
@@ -8,7 +9,7 @@ class Order:
     user_id: int
     symbol: str
     side: str
-    price: float | None
+    price: Decimal | None
     quantity: int
     filled_qty: int
     status: str
@@ -21,7 +22,6 @@ class Trade:
     order_id: int
     symbol: str
     side: str
-    price: float
+    price: Decimal
     quantity: int
     timestamp: datetime
-    
