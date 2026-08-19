@@ -8,7 +8,8 @@ class Order:
     user_id: int
     symbol: str
     side: str
-    price: float | None
+    from decimal import Decimal
+    price: Decimal | None
     quantity: int
     filled_qty: int
     status: str
