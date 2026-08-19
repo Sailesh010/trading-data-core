@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime ,timezone
 from decimal import Decimal
 
 from src.models import Trade
@@ -14,7 +14,7 @@ def test_trade_creates_balanced_ledger():
         side="BUY",
         price=Decimal("100.00"),
         quantity=5,
-        timestamp=datetime.utcnow()
+        timestamp=datetime.now(timezone.utc)
     )
 
     ledger = Ledger()
