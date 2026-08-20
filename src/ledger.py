@@ -1,4 +1,5 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from decimal import Decimal
 from typing import List
 
@@ -12,6 +13,7 @@ class LedgerEntry:
     direction: str
     amount: Decimal
     reference: str
+    posted_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class Ledger:
@@ -45,6 +47,7 @@ class Ledger:
 
         self._validate_balanced_journal(journal)
         self.entries.extend(journal)
+        return journal
 
     def _validate_balanced_journal(self, entries):
 
