@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: fct_trade_activity
+    description: Executed trade activity for operational reporting.
+    columns:
+      - name: trade_id
+        description: Stable executed-trade identifier.
+        data_tests: [not_null, unique]
+      - name: trade_notional
+        description: Price multiplied by quantity using fixed precision.
+        data_tests: [not_null]
+  - name: fct_ledger_postings
+    description: Debit, credit, and net activity by ledger account and journal.
+    columns:
+      - name: journal_id
+        data_tests: [not_null]
+      - name: account
+        data_tests: [not_null]
+  - name: fct_reconciliation_status
+    description: Reconciliation outcome for every operational trade.
+    columns:
+      - name: trade_id
+        data_tests: [not_null, unique]
+      - name: reconciliation_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [RECONCILED, MISSING_LEDGER, UNBALANCED_LEDGER, NOTIONAL_MISMATCH]
+  - name: fct_reconciliation_exceptions
+    description: Only trades requiring financial operations investigation.
+    columns:
+      - name: trade_id
+        data_tests: [not_null, unique]

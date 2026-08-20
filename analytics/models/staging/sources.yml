@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: operational
+    description: Durable operational records written by the transaction-processing service.
+    schema: public
+    tables:
+      - name: trades
+        description: Immutable executed trades; one row per trade identifier.
+        columns:
+          - name: trade_id
+            description: Stable trade identifier.
+            data_tests: [not_null, unique]
+          - name: order_id
+            data_tests: [not_null]
+          - name: price
+            data_tests: [not_null]
+          - name: quantity
+            data_tests: [not_null]
+          - name: executed_at
+            data_tests: [not_null]
+      - name: ledger_entries
+        description: Double-entry postings produced from financial events.
+        columns:
+          - name: entry_id
+            data_tests: [not_null, unique]
+          - name: journal_id
+            data_tests: [not_null]
+          - name: direction
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: [DEBIT, CREDIT]
+          - name: amount
+            data_tests: [not_null]
+          - name: reference
+            data_tests: [not_null]
