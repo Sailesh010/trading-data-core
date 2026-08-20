@@ -1,0 +1,4 @@
+aws_region  = "us-east-1"
+environment = "dev"
+
+# Do not set redis_auth_token here. Inject TF_VAR_redis_auth_token securely.
