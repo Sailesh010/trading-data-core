@@ -3,3 +3,8 @@
 github-recovery-codes.txt
 __pycache__/
 *.pyc
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
