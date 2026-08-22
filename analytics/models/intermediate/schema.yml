@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: int_trade_notionals
+    description: Executed trades with precisely calculated trade notional and ledger reference.
+    columns:
+      - name: trade_id
+        data_tests: [not_null, unique]
+  - name: int_ledger_activity
+    description: Ledger activity normalized by journal, reference, and account.
+  - name: int_trade_to_ledger
+    description: One-row-per-trade reconciliation comparison.
+    columns:
+      - name: trade_id
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_operational__trades')
+                field: trade_id
+      - name: reconciliation_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [RECONCILED, MISSING_LEDGER, UNBALANCED_LEDGER, NOTIONAL_MISMATCH]

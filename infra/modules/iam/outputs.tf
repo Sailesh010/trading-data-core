@@ -1,0 +1,1 @@
+output "application_role_arn" { value = aws_iam_role.application.arn }
